@@ -3,6 +3,9 @@ const nextConfig = {
   images: {
     domains: ["uploadthing.com", "utfs.io", "img.clerk.com"],
   },
+  env: {
+    NEXT_PUBLIC_LIVEKIT_URL: process.env.NEXT_PUBLIC_LIVEKIT_URL,
+  },
 };
 
-export default nextConfig;
+module.exports = nextConfig;
