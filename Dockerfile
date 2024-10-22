@@ -7,11 +7,11 @@ WORKDIR /app
 # Salin semua file ke dalam container
 COPY . .
 
-# Instal dependencies menggunakan Yarn
-RUN yarn install
+# Instal dependencies menggunakan Npm
+RUN npm install
 
 # Build aplikasi
-RUN yarn build
+RUN npm build
 
 # Jalankan aplikasi
-CMD ["yarn", "start"]
+CMD ["npm", "start"]
