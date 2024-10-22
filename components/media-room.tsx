@@ -5,6 +5,8 @@ import "@livekit/components-styles";
 import { LiveKitRoom, VideoConference } from "@livekit/components-react";
 import { useUser } from "@clerk/nextjs";
 import { Loader2 } from "lucide-react";
+import { log } from "console";
+import { env } from "process";
 
 interface MediaRoomProps {
   chatId: string;
@@ -38,6 +40,8 @@ export function MediaRoom({ chatId, video, audio }: MediaRoomProps) {
         <p className="text-xs text-zinc-500 dark:text-zinc-400">Loading...</p>
       </div>
     );
+
+  console.log("LiveKit URL:", process.env.NEXT_PUBLIC_LIVEKIT_URL);
 
   return (
     <LiveKitRoom video={video} audio={audio} token={token} connect={true} serverUrl={process.env.NEXT_PUBLIC_LIVEKIT_URL} data-lk-theme="default">
