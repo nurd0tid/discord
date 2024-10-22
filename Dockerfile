@@ -11,7 +11,7 @@ COPY . .
 RUN npm install
 
 # Build aplikasi
-RUN npm build
+RUN npm run build
 
 # Jalankan aplikasi
 CMD ["npm", "start"]
