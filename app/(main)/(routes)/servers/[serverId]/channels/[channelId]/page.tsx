@@ -16,6 +16,9 @@ interface ChannelIdPageProps {
   };
 }
 
+// Buat variabel serverUrl yang memuat env
+const serverUrl = process.env.NEXT_PUBLIC_BASE_LIVEKIT_URL || "";
+
 export default async function ChannelIdPage({ params: { channelId, serverId } }: ChannelIdPageProps) {
   const profile = await currentProfile();
 
@@ -61,8 +64,8 @@ export default async function ChannelIdPage({ params: { channelId, serverId } }:
           />
         </>
       )}
-      {channel.type === ChannelType.AUDIO && <MediaRoom chatId={channel.id} video={false} audio={true} />}
-      {channel.type === ChannelType.VIDEO && <MediaRoom chatId={channel.id} video={true} audio={true} />}
+      {channel.type === ChannelType.AUDIO && <MediaRoom chatId={channel.id} video={false} audio={true} serverUrl={serverUrl} />}
+      {channel.type === ChannelType.VIDEO && <MediaRoom chatId={channel.id} video={true} audio={true} serverUrl={serverUrl} />}
     </div>
   );
 }

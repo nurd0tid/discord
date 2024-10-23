@@ -10,14 +10,13 @@ interface MediaRoomProps {
   chatId: string;
   video: boolean;
   audio: boolean;
+  serverUrl: string;
 }
 
-export function MediaRoom({ chatId, video, audio }: MediaRoomProps) {
+
+export function MediaRoom({ chatId, video, audio, serverUrl }: MediaRoomProps) {
   const { user } = useUser();
   const [token, setToken] = useState("");
-
-  // Buat variabel serverUrl yang memuat env
-  const serverUrl = process.env.NEXT_PUBLIC_BASE_LIVEKIT_URL || "";
 
   useEffect(() => {
     if (!user?.firstName) return;
@@ -50,4 +49,3 @@ export function MediaRoom({ chatId, video, audio }: MediaRoomProps) {
     </LiveKitRoom>
   );
 }
-
