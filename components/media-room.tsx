@@ -16,6 +16,9 @@ export function MediaRoom({ chatId, video, audio }: MediaRoomProps) {
   const { user } = useUser();
   const [token, setToken] = useState("");
 
+  // Buat variabel serverUrl yang memuat env
+  const serverUrl = process.env.NEXT_PUBLIC_BASE_LIVEKIT_URL || "";
+
   useEffect(() => {
     if (!user?.firstName) return;
 
@@ -30,7 +33,7 @@ export function MediaRoom({ chatId, video, audio }: MediaRoomProps) {
     })();
   }, [user?.firstName, chatId]);
 
-  if (token === "")
+  if (token === "" || serverUrl === "")
     return (
       <div className="flex flex-col flex-1 justify-center items-center">
         <Loader2 className="h-7 w-7 text-zinc-500 animate-spin my-4" />
@@ -38,11 +41,13 @@ export function MediaRoom({ chatId, video, audio }: MediaRoomProps) {
       </div>
     );
 
-  console.log("LiveKit URL:", process.env.NEXT_PUBLIC_BASE_LIVEKIT_URL);
+  // Log untuk memastikan URL server ter-load
+  console.log("LiveKit URL:", serverUrl);
 
   return (
-    <LiveKitRoom video={video} audio={audio} token={token} connect={true} serverUrl={process.env.NEXT_PUBLIC_BASE_LIVEKIT_URL} data-lk-theme="default">
+    <LiveKitRoom video={video} audio={audio} token={token} connect={true} serverUrl={serverUrl} data-lk-theme="default">
       <VideoConference />
     </LiveKitRoom>
   );
 }
+
