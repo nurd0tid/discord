@@ -9,6 +9,9 @@ import { ChatMessages } from "@/components/chat/chat-messages";
 import { ChatInput } from "@/components/chat/chat-input";
 import { MediaRoom } from "@/components/media-room";
 
+// Buat variabel serverUrl yang memuat env
+const serverUrl = process.env.NEXT_PUBLIC_BASE_LIVEKIT_URL || "";
+
 interface MemberIdPageProps {
   params: {
     memberId: string;
@@ -47,7 +50,7 @@ export default async function MemberIdPage({ params: { memberId, serverId }, sea
   return (
     <div className="bg-white dark:bg-[#313338] flex flex-col h-full">
       <ChatHeader imageUrl={otherMember.profile.imageUrl} name={otherMember.profile.name} serverId={serverId} type="conversation" />
-      {video && <MediaRoom chatId={conversation.id} video audio />}
+      {video && <MediaRoom chatId={conversation.id} video audio serverUrl={serverUrl}/>}
       {!video && (
         <>
           <ChatMessages
